@@ -1,13 +1,8 @@
-    // src/pages/index.tsx
-    import React from 'react';
+import React from 'react';
+import LoginScreen from './LoginScreen';
 
-    const HomePage: React.FC = () => {
-      return (
-        <div>
-          <h1>Welcome to Next.js with TypeScript!</h1>
-          <p>This is the homepage.</p>
-        </div>
-      );
-    };
+const HomePage: React.FC = () => {
+  return <LoginScreen />;
+};
 
-    export default HomePage;
+export default HomePage;
