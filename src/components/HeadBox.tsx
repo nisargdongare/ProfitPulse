@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import styles from '../styles/components/HeadBox.module.scss';
 
 interface HeadBoxProps {
@@ -18,6 +19,7 @@ const HeadBox: React.FC<HeadBoxProps> = ({
   showSignOut = true
 }) => {
   const router = useRouter();
+  const serviceConnectionStatus = useSelector((state: any) => state.common.serviceConnectionStatus);
 
   const handleSignOut = () => {
     router.push('/LoginScreen');
@@ -45,11 +47,23 @@ const HeadBox: React.FC<HeadBoxProps> = ({
           <p className={styles.subtitle}>{subtitle}</p>
         </div>
       </div>
-      {showSignOut && (
-        <button className={styles.signOutButton} onClick={handleSignOut}>
-          Sign Out
-        </button>
-      )}
+
+      <div className={styles.headerRight}>
+        <div className={`${styles.statusIndicator} ${
+          serviceConnectionStatus === 'Service Connected' ? styles.connected :
+          serviceConnectionStatus === 'Service Not Connected' ? styles.disconnected :
+          styles.default
+        }`}>
+          <div className={styles.statusDot}></div>
+          <span>{serviceConnectionStatus}</span>
+        </div>
+
+        {showSignOut && (
+          <button className={styles.signOutButton} onClick={handleSignOut}>
+            Sign Out
+          </button>
+        )}
+      </div>
     </header>
   );
 };
