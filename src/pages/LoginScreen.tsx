@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from '../styles/components/LoginScreen.module.scss';
 // File: components/Login.tsx
 
 export default function Login() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
@@ -12,7 +14,11 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     // Replace with your API call
-    setTimeout(() => setLoading(false), 800);
+    setTimeout(() => {
+      setLoading(false);
+      // Redirect to Dashboard after successful sign in
+      router.push('/Dashboard');
+    }, 800);
   }
 
   return (
